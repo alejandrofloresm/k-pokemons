@@ -16,3 +16,4 @@ Route::get('/', function () {
 });
 
 Route::resource('trainers', 'TrainersController');
+Route::resource('towns', 'TownsController');
