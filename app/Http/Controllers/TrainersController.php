@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use App\Trainer;
+use App\Town;
+
 class TrainersController extends Controller
 {
     /**
@@ -14,7 +17,8 @@ class TrainersController extends Controller
     public function index()
     {
         //
-        return view('trainers.index');
+        $trainers = Trainer::all();
+        return view('trainers.index', ['trainers' => $trainers]);
     }
 
     /**
@@ -25,6 +29,8 @@ class TrainersController extends Controller
     public function create()
     {
         //
+        $towns = Town::all();
+        return view('trainers.create', ['towns' => $towns]);
     }
 
     /**
@@ -36,6 +42,11 @@ class TrainersController extends Controller
     public function store(Request $request)
     {
         //
+        $trainer = new Trainer;
+        $trainer->name = $request->input('name');
+        $trainer->town_id = $request->input('town_id');
+        $trainer->save();
+        return redirect()->route('trainers.index');
     }
 
     /**
